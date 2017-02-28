@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.EmpMapper">
+
+<resultMap type="com.example.domain.Emp" id="resultWithDept">
+	<association javaType="com.example.domain.Dept" property="dept" select="selectDept" column="deptno"/>
+</resultMap>
+
+<select id="selectAllWithDept" resultMap="resultWithDept">
+	select *
+	  from emp
+</select>
+
+<select id="selectDept" resultType="com.example.domain.Dept">
+	select *
+	  from dept
+	 where deptno=#{deptno} 
+</select>
+
+<resultMap type="com.example.domain.Emp" id="resultWithDept2">
+	<id property="empno" column="empno"/>
+	<association javaType="com.example.domain.Dept" property="dept">
+		<id property="deptno" column="deptno"/>
+		<result property="dname" column="dname"/>
+		<result property="loc" column="loc"/>
+	</association>
+</resultMap>
+
+<select id="selectAllWithDept2" resultMap="resultWithDept2">
+	select e.empno as empno,
+		e.ename as ename,
+		e.job as job,
+		e.mgr as mgr,
+		e.hiredate as hiredate,
+		e.sal as sal,
+		e.comm as comm,
+		d.deptno as deptno,
+		d.dname as dname,
+		d.loc as loc
+  from emp e INNER join dept d
+    on e.deptno = d.deptno
+</select>
+
+
+</mapper>

@@ -9,13 +9,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.domain.Dept;
+import com.example.domain.Emp;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DeptMapperTests {
+public class EmpMapperTests {
 	
 	@Autowired
-	DeptMapper mapper;
+	EmpMapper mapper;
 	
 	@Test
 	public void test00_confirmMapper() {
@@ -24,10 +25,26 @@ public class DeptMapperTests {
 	
 	@Test
 	public void test01_selectAll() {
-		List<Dept> list = mapper.selectAll();
+		List<Emp> list = mapper.selectAll();
 		
-		for (Dept dept : list)
-			System.out.println(dept);
+		for (Emp emp : list)
+			System.out.println(emp);
+	}
+	
+	@Test
+	public void test01_selectAllWithEmp() {
+		List<Emp> list = mapper.selectAllWithDept();
+		
+		for (Emp emp : list)
+			System.out.println(emp);
+	}
+	
+	@Test
+	public void test01_selectAllWithEmp2() {
+		List<Emp> list = mapper.selectAllWithDept2();
+		
+		for (Emp emp : list)
+			System.out.println(emp);
 	}
 	
 	@Test
